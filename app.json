@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AwesomeProjects",
-    "slug": "AwesomeProjects",
+    "name": "react-native-login-auth",
+    "slug": "react-native-login-auth",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": [
