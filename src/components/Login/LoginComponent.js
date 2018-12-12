@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+
 import { renderField } from "../Field";
 import loginValidate from "./LoginValidate";
 
@@ -9,45 +10,51 @@ class LoginFormComponent extends Component {
     super(props);
   }
 
-  onSubmit = formProps => {
-    this.props.onLogin(formProps, () => {
-      console.log("form valuse", formProps);
+  onSubmit = ({ email, password } ) => {
+    this.props.onLogin( { email, password } , () => {
+      console.log("form values", { email, password });
       this.props.navigation.navigate("welcome");
     });
   };
 
-    render() {
-        const { handleSubmit} = this.props;
-        return (
-            <View style={styles.container}>
-                <Text style={styles.titleText}>login form</Text>
-                <Field
-                    keyboardType="email-address"
-                    returnKeyType="next"
-                    label="Email: "
-                    component={renderField}
-                    name="Email"
-                    placeholder="Email"
-                />
-                <Field
-                    keyboardType="default"
-                    returnKeyType="go"
-                    label="Password: "
-                    secureTextEntry
-                    component={renderField}
-                    name="Password"
-                    placeholder="••••••••••"
-                    type="password"
-                />
-                <TouchableOpacity
-                    style={styles.submitTestWrapper}
-                    onPress={handleSubmit(this.onSubmit)}
-                >
-                    <Text style={styles.submitButtonText} >login</Text>
-                </TouchableOpacity>
-            </View>
-        );
+  renderError = () => {
+    if(this.props.errorMessage){
+      return (
+        <Text> oops {this.props.errorMessage}</Text>
+      );
     }
+  }
+
+  render() {
+    const { handleSubmit } = this.props;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.titleText}>Login Portal</Text>
+        <Field
+          name="email"
+          placeholder="Email Address"
+          autoCapitalize="none"
+          isEmail
+          component={renderField}
+        />
+        <Field
+          name="password"
+          placeholder="••••••••••"
+          isPassword
+          autoCapitalize="none"
+          component={renderField}
+        />
+        <TouchableOpacity
+          style={styles.submitTestWrapper}
+          onPress={handleSubmit(this.onSubmit)}
+        >
+          <Text style={styles.submitButtonText}>Login</Text>
+        </TouchableOpacity>
+        <Text>{this.renderError}</Text>
+
+      </View>
+    );
+  }
 }
 
 export default reduxForm({
@@ -82,5 +89,8 @@ const styles = StyleSheet.create({
   submitTestWrapper: {
     margin: 10,
     alignItems: "center"
+  },
+  textError: {
+    color: "red"
   }
 });

@@ -1,13 +1,14 @@
-const API_URL = "http://localhost:3030/api/v1/login";
+const API_URL = "http://192.168.8.104:3030/api/v1/login";
 
-function LoginService(email, password) {
-  return fetch(API_URL, {
-    method: " POST",
-    headers: {
-      Accept: "application/json"
-    },
-    body: JSON.stringify(email, password)
-  });
+const LoginService = ({email, password}) => {
+  console.log("from service ", {email, password});
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+};
+
+  return fetch(API_URL, requestOptions);
 }
 
 export default LoginService;

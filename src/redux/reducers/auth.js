@@ -1,7 +1,8 @@
 const defaultState = {
   loggingIn: false,
   loggedIn: false,
-  user: "",
+  email: "",
+  password: "",
   token: "",
   loginError: ""
 };
@@ -12,7 +13,8 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         loggingIn: true,
-        user: action.user
+        email: action.email,
+        password: action.password
       };
     case "LOGIN_SUCCESS":
       return {

@@ -1,13 +1,11 @@
-import React from "react";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-
-import LoginScreen from "../containers/LoginContainer";
-import WelcomeScreen from "../components/Welcome/WelcomeScreen";
+import LoginContainer from "../containers/LoginContainer";
+import WelcomeContainer from "../containers/WelcomeContainer";
 
 const RootStack = createStackNavigator(
   {
-    welcome: WelcomeScreen,
-    login: LoginScreen
+    welcome: WelcomeContainer,
+    login: LoginContainer
   },
   {
     initialRouteName: "login",

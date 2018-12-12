@@ -2,14 +2,27 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
 
 // Passing Custom Reusable Components to Field
-export const renderField = ({ label, keyboardType, name }) => {
-  return (
-    <View style={styles.textInputContainer}>
-      <Text style={styles.labelText}>{label}</Text>
-      <TextInput style={styles.textInput} keyboardType={keyboardType} />
-    </View>
-  );
-};
+export const renderField = ({
+  input: { onChange, ...restInput }, 
+  placeholder, 
+  isPassword, 
+  autoCapitalize,
+  isEmail, 
+  meta: { touched, error},
+}) => (
+  <View style={{ width: '100%', paddingBottom: 15 }}>
+    <TextInput
+      onChangeText={onChange}
+      style={[styles.textInput, { width: '100%' }]}
+      placeholder={placeholder}
+      autoCapitalize={autoCapitalize}
+      secureTextEntry={isPassword || false}
+      keyboardType={isEmail ? 'email-address' : 'default'}
+      {...restInput}
+    />
+    {touched && error && <Text style={{ color: 'red', fontWeight: 'bold' }}>{error}</Text>}
+  </View>
+);
 
 const styles = StyleSheet.create({
   textInputContainer: {
