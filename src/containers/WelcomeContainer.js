@@ -1,4 +1,4 @@
-import WelcomeComponent from "../components/Welcome/WelcomeComponent";
+import WelcomeComponent from "../components/WelcomeComponent";
 import { connect } from "react-redux";
 import { changeLocale } from "../redux/actions/actionCreators";
 

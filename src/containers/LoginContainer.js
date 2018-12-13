@@ -1,20 +1,19 @@
 import { connect } from "react-redux";
-
-import { login } from "../redux/actions/auth";
-import LoginComponent from "../components/Login/LoginComponent";
+import { login, resetLogin } from "../redux/actions/actionCreators";
+import LoginComponent from "../components/LoginComponent";
 
 const mapStateToProps = state => {
   return {
-    errorMessage: state.auth.loginError
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: ({email, password}) => {
-      console.log("from dispatch", {email, password})
-      dispatch(login({email, password}));
-    }
+    onLogin: (email, password) => {
+      dispatch(login(email, password));
+    },
+    resetLogin: () => dispatch(resetLogin())
   };
 };
 

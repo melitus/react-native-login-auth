@@ -1,7 +1,6 @@
-export const actionTypes = {
-  LOGIN_REQUEST: "LOGIN_REQUEST",
-  LOGIN_SUCCESS: "LOGIN_SUCCESS",
-  LOGIN_FAIL: "LOGIN_FAIL"
-};
-
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const RESET_LOGIN_STATE = "RESET_LOGIN_STATE";
 export const CHANGE_LOCALE = "CHANGE_LOCALE";
+

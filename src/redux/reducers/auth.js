@@ -1,6 +1,6 @@
 const defaultState = {
-  loggingIn: false,
-  loggedIn: false,
+  isLoggingIn: false,
+  isLoggedIn: false,
   email: "",
   password: "",
   token: "",
@@ -12,20 +12,20 @@ export default function reducer(state = defaultState, action) {
     case "LOGIN_REQUEST":
       return {
         ...state,
-        loggingIn: true,
+        isLoggingIn: true,
         email: action.email,
         password: action.password
       };
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        loggedIn: true,
+        isLoggedIn: true,
         token: action.token
       };
     case "LOGIN_FAIL":
       return {
         ...state,
-        loggedIn: false,
+        isLoggedIn: false,
         loginError: action.error
       };
     default:

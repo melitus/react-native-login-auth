@@ -1,14 +1,13 @@
-const API_URL = "http://192.168.8.104:3030/api/v1/login";
+const API_URL = "https://pure-fortress-46948.herokuapp.com/api/v1/login";
 
-const LoginService = ({email, password}) => {
-  console.log("from service ", {email, password});
+const LoginService = user => {
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-};
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  };
 
   return fetch(API_URL, requestOptions);
-}
+};
 
 export default LoginService;

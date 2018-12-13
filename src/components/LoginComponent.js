@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-
-import { renderField } from "../Field";
+import Error from "./ErrorComponent";
+import { renderField } from "./Field";
 import loginValidate from "./LoginValidate";
 
 class LoginFormComponent extends Component {
@@ -10,16 +10,15 @@ class LoginFormComponent extends Component {
     super(props);
   }
 
-  onSubmit = ({ email, password } ) => {
-    this.props.onLogin( { email, password } , () => {
-      console.log("form values", { email, password });
-      if(this.props.errorMessage){
-        alert(this.props.errorMessage)
-      }
-      else{
-        this.props.navigation.navigate("welcome");
-      }
-    });
+  componentDidUpdate() {
+    if (this.props.auth.token) {
+      this.props.navigation.navigate("welcome");
+      this.props.resetLogin();
+    }
+  }
+
+  onSubmit = ({ email, password }) => {
+    this.props.onLogin({ email, password });
   };
 
   render() {
@@ -45,8 +44,15 @@ class LoginFormComponent extends Component {
           style={styles.submitTestWrapper}
           onPress={handleSubmit(this.onSubmit)}
         >
-          <Text style={styles.submitButtonText}>Login</Text>
+          <Text style={styles.submitButtonText}>
+            {this.props.auth.isLoggingIn === true ? "Logging In ..." : "Login"}
+          </Text>
         </TouchableOpacity>
+        {this.props.auth.loginError ? (
+          <Error error={this.props.auth.loginError} />
+        ) : (
+          <Text></Text>
+        )}
       </View>
     );
   }
